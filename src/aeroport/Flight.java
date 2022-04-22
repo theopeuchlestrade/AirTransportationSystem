@@ -20,8 +20,10 @@ public class Flight {
     private Airport startAirport = null;
     private Airport endAirport = null;
 
+
     /* setCompanyWithoutBidirectional */
     private Company company = new Company();
+
 
     /* Constructor */
 

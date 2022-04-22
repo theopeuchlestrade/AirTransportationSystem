@@ -16,6 +16,7 @@ public class Company {
         this.name = name;
     }
 
+
     /* Constructor */
     public Company() {
         this.name = "";
@@ -29,6 +30,7 @@ public class Company {
     public void removeFlight(Flight flight) {
         this.flights.remove(flight);
     }
+
 
     public List<Flight> getFlights() {
         return flights;
