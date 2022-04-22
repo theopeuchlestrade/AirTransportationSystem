@@ -1,53 +1,64 @@
-import aeroport.Compagnie;
-import aeroport.Vol;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import aeroport.Company;
+import aeroport.Flight;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 
 public class Start {
 
-    public static void main(String[] args){
-        Vol volFinal = new Vol();
+    public static void main(String[] args) {
+        Flight volFinal = new Flight();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-        String dd = "21/10/2020 13:00";
-        String da = "23/10/2020 02:15";
+        /* ZonedDateTime */
+        LocalDateTime localDateTime = LocalDateTime.of(2000, Month.JANUARY, 1, 0, 0, 0);
+        LocalDateTime localDateTime2 = LocalDateTime.of(2000, Month.JANUARY, 1, 9, 36, 0);
+
+        ZoneId frZoneId = ZoneId.of("Europe/Paris");
+        ZoneId vnZoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+
+        ZonedDateTime frDateTime = ZonedDateTime.of(localDateTime, frZoneId);
+        ZonedDateTime vnDateTime = ZonedDateTime.of(localDateTime2, vnZoneId);
 
         try {
-            volFinal.setDateDepart(format.parse(dd));
-            volFinal.setDateArrivee(format.parse(da));
-        } catch (Exception e){
+            volFinal.setStart(frDateTime, vnDateTime);
+
+        } catch (Exception e) {
             throw new RuntimeException("Unable to format to date");
         }
 
-        System.out.println(volFinal.getDateArrivee());
-        System.out.println(volFinal.obtenirDuree().toString().substring(2));
+        volFinal.computeDuration();
+        System.out.println(volFinal.getEnd());
+        System.out.println(volFinal.getDuration());
 
 
         //Bidirectional
-        Vol vol = new Vol();
-        vol.setNumero("abc1");
+        Flight vol = new Flight();
+        vol.setFlightID("abc1");
 
-        Vol vol2 = new Vol();
-        vol2.setNumero("abc2");
+        Flight vol2 = new Flight();
+        vol2.setFlightID("abc2");
 
-        Compagnie compagnie = new Compagnie();
-        compagnie.setName("Air France");
-        compagnie.addVol(vol);
-        compagnie.addVol(vol2);
+        Company compagnie = new Company("Air France");
+        compagnie.addFlight(vol);
+        compagnie.addFlight(vol2);
 
-        for(Vol v : compagnie.getVols()){
-            System.out.println(v.getNumero());
+        for (Flight v : compagnie.getFlights()) {
+            System.out.println(v.getFlightID());
         }
 
-        System.out.println(vol.getCompagnie().getName());
-        System.out.println(vol2.getCompagnie().getName());
+        System.out.println(vol.getCompany().getName());
+        System.out.println(vol2.getCompany().getName());
 
-        vol2.setCompagnie(null);
-        System.out.println(vol2.getCompagnie());
+        vol2.setCompany(null);
+        System.out.println(vol2.getCompany());
 
-        for(Vol v : compagnie.getVols()){
-            System.out.println(v.getNumero());
+        for (Flight v : compagnie.getFlights()) {
+            System.out.println(v.getFlightID());
         }
     }
 }

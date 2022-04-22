@@ -20,9 +20,26 @@ public class Flight {
     private Airport startAirport = null;
     private Airport endAirport = null;
 
+
+    /* setCompanyWithoutBidirectional */
+    private Company company = new Company();
+
+
     /* Constructor */
 
     public Flight() {
+
+    }
+
+    /* Constructor */
+    public Flight(ZonedDateTime start, ZonedDateTime end, Airport startAirport, Airport endAirport) {
+
+        this.flightID = generateID();
+        this.start = start;
+        this.end = end;
+        this.startAirport = startAirport;
+        this.endAirport = endAirport;
+        this.isOpen = true; // open reservation by default
 
     }
 
@@ -30,24 +47,45 @@ public class Flight {
         return UUID.randomUUID().toString();
     }
 
-    public void openReservation() {
+    public String getFlightID() {
+        return flightID;
+    }
 
+    public long getDuration() {
+        return duration;
+    }
+
+    public void openReservation() {
+        this.isOpen = true;
     }
 
     public void closeReservation() {
-
+        this.isOpen = false;
     }
 
-    public void setStart(ZonedDateTime start) {
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setStart(ZonedDateTime start, ZonedDateTime end) {
         this.start = start;
+        this.end = end;
+        this.computeDuration();
     }
 
-    public long computeDuration() {
-        // TODO
+    public void computeDuration() {
+
         if (this.start != null && this.end != null) {
-            return Duration.of(end.getTime() - start.getTime(), ChronoUnit.MILLIS);
+            this.duration = Duration.of(end.getNano() - start.getNano(), ChronoUnit.NANOS).toMillis();
         }
-        return null;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
     }
 
     public void addStopover(Stopover stopover) {
@@ -58,8 +96,30 @@ public class Flight {
         this.stopovers.remove(stopover);
     }
 
+    public ZonedDateTime getEnd() {
+        return end;
+    }
+
     @Override
     public String toString() {
-        return "";
+        return "Flight{" +
+                "flightID='" + flightID + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", duration=" + duration +
+                ", isOpen=" + isOpen +
+                ", stopovers=" + stopovers +
+                ", startAirport=" + startAirport +
+                ", endAirport=" + endAirport +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            return ((Flight) obj).getFlightID().equals(this.flightID);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
