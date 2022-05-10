@@ -31,11 +31,13 @@ public class Reservation {
     }
 
     public void cancel() {
-        // TODO
+        this.flight.closeReservation();
+        System.out.println("Votre réservation a bien été annulée.");
     }
 
     public void reserve() {
-        // TODO
+        this.flight.openReservation();
+        System.out.println("Votre vol a bien été réservé.");
     }
 
     @Override

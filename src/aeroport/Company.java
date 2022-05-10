@@ -31,7 +31,6 @@ public class Company {
         this.flights.remove(flight);
     }
 
-
     public List<Flight> getFlights() {
         return flights;
     }

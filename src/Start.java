@@ -86,7 +86,7 @@ public class Start {
 
 
         try {
-            superLongFlight.setStart(enDateTime, enDateTime);
+            superLongFlight.setStart(enDateTime, auDateTime);
 
         } catch (Exception e) {
             throw new RuntimeException("Unable to format to date");

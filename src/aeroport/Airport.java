@@ -29,7 +29,9 @@ public class Airport {
 
     @Override
     public String toString() {
-        return "";
+        return "Airport{" +
+                "name='" + name + '\'' +
+                ", cities=" + cities +
+                '}';
     }
-
 }

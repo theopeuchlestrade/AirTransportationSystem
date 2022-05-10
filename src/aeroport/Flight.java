@@ -52,7 +52,7 @@ public class Flight {
     }
 
     public long getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public void openReservation() {
@@ -79,6 +79,15 @@ public class Flight {
 
     public void computeDuration() {
 
+        // Compute time based on given stepover.
+        if(!stopovers.isEmpty()) {
+            System.out.println("This flight has several steps.");
+            for (Stopover step : this.stopovers) {
+                this.duration += step.getDuration();
+            }
+        }
+
+        // Compute time by given a start and stop date.
         if (this.start != null && this.end != null) {
             this.duration = Duration.of(end.getNano() - start.getNano(), ChronoUnit.NANOS).toMillis();
         }
