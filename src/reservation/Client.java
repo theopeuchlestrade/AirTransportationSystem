@@ -1,20 +1,25 @@
 package reservation;
 
+import java.util.UUID;
+
 public class Client extends Person {
 
     private String contact;
+    private PaymentMethod paymentMethod;
     private String reference;
 
     /* Constructor  */
     public Client(String name, String contact, PaymentMethod paymentMethod) {
-
         super(name);
+        this.setName(name);
         this.contact = contact;
+        this.paymentMethod = paymentMethod;
+        this.reference = generateNewReference();
+
     }
 
     public String generateNewReference() {
-        // TODO implement
-        return "";
+        return UUID.randomUUID().toString();
     }
 
     @Override

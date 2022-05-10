@@ -84,6 +84,34 @@ public class Flight {
         }
     }
 
+    public void displayStopOvers(){
+
+        for (int i = 0; i < this.stopovers.size(); i++) {
+
+            if (i==0) {
+                System.out.println("Début : "+ this.stopovers.get(i).getName() + " à " + this.start);
+                drawStep();
+            }
+
+            else if (i == this.stopovers.size() - 1  ) {
+                System.out.println("Fin : " + this.stopovers.get(i).getName()+ " à " + this.end);
+            } else {
+                System.out.println("Escale à : " + this.stopovers.get(i).getName());
+                drawStep();
+            }
+
+
+        }
+
+    }
+
+    private void drawStep(){
+        System.out.println("| |");
+        System.out.println("| |");
+        System.out.println("| |");
+        System.out.println(" V ");
+    }
+
     public void setFlightID(String flightID) {
         this.flightID = flightID;
     }

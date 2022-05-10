@@ -2,11 +2,13 @@
 
 import aeroport.Company;
 import aeroport.Flight;
+import aeroport.Stopover;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 
 public class Start {
@@ -60,5 +62,42 @@ public class Start {
         for (Flight v : compagnie.getFlights()) {
             System.out.println(v.getFlightID());
         }
+
+        // 2022/01/01 : 00h00
+        LocalDateTime localENDateTime = LocalDateTime.of(2022, Month.JANUARY, 1, 0, 0, 0);
+        // 2022/01/01 : 19h00
+        LocalDateTime localAUDateTime2 = LocalDateTime.of(2022, Month.JANUARY, 1, 19, 0, 0);
+        // 2022/01/01 : 22h00
+        LocalDateTime localCODateTime2 = LocalDateTime.of(2022, Month.JANUARY, 1, 22, 0, 0);
+
+        ZoneId enZoneId = ZoneId.of("Europe/London");
+        ZoneId auZoneId = ZoneId.of("Australia/Brisbane");
+        ZoneId coZoneId = ZoneId.of("Asia/Seoul");
+
+        ZonedDateTime enDateTime = ZonedDateTime.of(localENDateTime, enZoneId);
+        ZonedDateTime auDateTime = ZonedDateTime.of(localAUDateTime2, auZoneId);
+        ZonedDateTime coDateTime = ZonedDateTime.of(localCODateTime2, coZoneId);
+
+        Stopover brisbane = new Stopover("Brisbane", new Date(), new Date());
+        Stopover london = new Stopover("London", new Date(), new Date());
+        Stopover busan = new Stopover("Busan", new Date(), new Date());
+
+        Flight superLongFlight = new Flight();
+
+
+        try {
+            superLongFlight.setStart(enDateTime, enDateTime);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to format to date");
+        }
+
+
+        superLongFlight.addStopover(brisbane);
+        superLongFlight.addStopover(london);
+        superLongFlight.addStopover(busan);
+
+        superLongFlight.displayStopOvers();
+
     }
 }

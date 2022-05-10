@@ -3,11 +3,12 @@ package reservation;
 import aeroport.Flight;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Reservation {
 
     /* private fields  */
-    private Integer reservationNumber; // unique
+    private String reservationNumber; // unique
     private ZonedDateTime date;
 
     /* external links  */
@@ -16,29 +17,31 @@ public class Reservation {
     private Client client;
     private Passenger passenger;
 
+
     /* Constructor */
     public Reservation(Flight flight, Client client, Passenger passenger) {
         this.client = client;
         this.passenger = passenger;
         this.flight = flight;
+        this.reservationNumber = generateNewReservationNumber();
     }
 
     public String generateNewReservationNumber() {
-        return "";
+        return UUID.randomUUID().toString();
     }
 
     public void cancel() {
-
+        // TODO
     }
 
     public void reserve() {
-
+        // TODO
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
-                "reservationNumber=" + reservationNumber +
+                "  reservationNumber=" + reservationNumber +
                 ", date=" + date +
                 ", flight=" + flight +
                 ", client=" + client +

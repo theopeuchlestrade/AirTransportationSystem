@@ -13,14 +13,19 @@ public class Stopover extends Airport {
         super(name);
         this.start = start;
         this.end = end;
+        this.computeDuration(); // update if necessary
     }
 
     public void computeDuration() {
-        // TODO
+        if (this.start != null && this.end != null) {
+            this.duration = end.getTime() - start.getTime() ;
+        }
     }
 
     public void setStart(Date start, Date end) {
-        // TODO
+        this.start = start;
+        this.end = end;
+        this.computeDuration(); // force update
     }
 
     public Date getStart() {
@@ -29,5 +34,17 @@ public class Stopover extends Airport {
 
     public Date getEnd() {
         return end;
+    }
+
+    public Long getDuration() {
+        return duration;
+    }
+
+    @Override
+    public String toString() {
+        return  "Stopover : " + "\n" +
+                "Start date : " + start + "\n" +
+                "End date : " + end  + "\n" ;
+
     }
 }
