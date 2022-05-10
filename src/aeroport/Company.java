@@ -51,6 +51,7 @@ public class Company {
 
     @Override
     public String toString() {
-        return "";
+        return "Name = " + this.name + "\n" +
+                "Flights : " + this.flights;
     }
 }
