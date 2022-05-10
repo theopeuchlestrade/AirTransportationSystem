@@ -78,9 +78,11 @@ public class Start {
         ZonedDateTime auDateTime = ZonedDateTime.of(localAUDateTime2, auZoneId);
         ZonedDateTime coDateTime = ZonedDateTime.of(localCODateTime2, coZoneId);
 
+        // TODO
         Stopover brisbane = new Stopover("Brisbane", new Date(), new Date());
         Stopover london = new Stopover("London", new Date(), new Date());
         Stopover busan = new Stopover("Busan", new Date(), new Date());
+        Stopover test = new Stopover("Test", new Date(), new Date());
 
         Flight superLongFlight = new Flight();
 
@@ -96,6 +98,9 @@ public class Start {
         superLongFlight.addStopover(brisbane);
         superLongFlight.addStopover(london);
         superLongFlight.addStopover(busan);
+
+        superLongFlight.addStopover(test);
+        superLongFlight.removeStopover(test);
 
         superLongFlight.displayStopOvers();
 

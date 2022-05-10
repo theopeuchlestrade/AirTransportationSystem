@@ -1,5 +1,6 @@
 package aeroport;
 
+import java.security.Timestamp;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -28,7 +29,7 @@ public class Flight {
     /* Constructor */
 
     public Flight() {
-
+        this.flightID = generateID();
     }
 
     /* Constructor */
@@ -52,11 +53,16 @@ public class Flight {
     }
 
     public long getDuration() {
+        this.computeDuration();  // force update
         return this.duration;
     }
 
     public void openReservation() {
         this.isOpen = true;
+    }
+
+    public boolean getStatus(){
+        return this.isOpen;
     }
 
     public void closeReservation() {
@@ -89,7 +95,8 @@ public class Flight {
 
         // Compute time by given a start and stop date.
         if (this.start != null && this.end != null) {
-            this.duration = Duration.of(end.getNano() - start.getNano(), ChronoUnit.NANOS).toMillis();
+
+            this.duration = ChronoUnit.MILLIS.between(this.start, this.end);
         }
     }
 

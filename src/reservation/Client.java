@@ -22,6 +22,10 @@ public class Client extends Person {
         return UUID.randomUUID().toString();
     }
 
+    public String getReference() {
+        return reference;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
