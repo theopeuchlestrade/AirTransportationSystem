@@ -1,6 +1,6 @@
 
 
-# TP 4 Génie Logiciel 
+# Projet de Génie Logiciel 
 
 Implémentation d'un système de transport aérien en Java. Utilisation de Gradle comme outil de build. Réalisation de tests unitaires. 
 
